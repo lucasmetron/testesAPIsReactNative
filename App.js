@@ -38,7 +38,7 @@ const App = () => {
           title="Tirar Foto"
           onPress={shot}
         />
-        <Image style={{ width: 100, height: 100 }} source={{ uri: uri }} /> {/*Mostra foto tirada*/}
+        <Image style={{ width: 100, height: 100 }} source={{ uri: uri }} />
       </View>
     </SafeAreaView>
   );

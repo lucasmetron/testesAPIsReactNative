@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -6,6 +6,8 @@ import {
   Button,
   Image,
 } from 'react-native';
+
+import CameraRoll from '@react-native-community/cameraroll'
 
 import { RNCamera } from 'react-native-camera'
 
@@ -16,18 +18,24 @@ const App = () => {
 
 
   async function shot() {
+    console.log('teste')
     if (camera) {
       const options = { quality: 0.5, base64: true }
       const data = await camera.takePictureAsync(options)
       setUri(data.uri)
+      await CameraRoll.save(data.uri).then(res => console.log(res)).catch(erro => { console.log('erro', erro) })
+      console.log('teste2')
+
+      // console.log(CameraRoll.saveToCameraRoll(data.uri))
     }
 
   }
 
+
   return (
     <SafeAreaView>
       <View>
-        <Text>OI :D :D</Text>
+        <Text>OI</Text>
         <RNCamera
           ref={ref => { setCamera(ref) }} //ref da camera
           style={{ margin: 50, height: 200, width: 200 }}
@@ -35,7 +43,7 @@ const App = () => {
           flashMode={RNCamera.Constants.FlashMode.on} //ligando o flah
         />
         <Button
-          title="Tirar Foto"
+          title="Tirar Fotooo"
           onPress={shot}
         />
         <Image style={{ width: 100, height: 100 }} source={{ uri: uri }} />

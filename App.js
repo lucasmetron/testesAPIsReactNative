@@ -16,6 +16,20 @@ const App = () => {
   let [camera, setCamera] = useState(''); //armazena ref da camera
   const [uri, setUri] = useState('') //endereço da imagem salva
 
+  useEffect(() => {
+    async function get() {
+      let response = await CameraRoll.getPhotos({
+        first: 10,
+        assetType: 'Photos',
+
+      })
+      console.log('responde', response)
+    }
+    get();
+
+
+  }, [])
+
 
   async function shot() {
     console.log('teste')
@@ -23,10 +37,9 @@ const App = () => {
       const options = { quality: 0.5, base64: true }
       const data = await camera.takePictureAsync(options)
       setUri(data.uri)
-      await CameraRoll.save(data.uri).then(res => console.log(res)).catch(erro => { console.log('erro', erro) })
-      console.log('teste2')
-
-      // console.log(CameraRoll.saveToCameraRoll(data.uri))
+      console.log(data)
+      await CameraRoll.save(data.uri, { type: 'photo' })
+      get()
     }
 
   }

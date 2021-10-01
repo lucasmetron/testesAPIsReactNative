@@ -18,6 +18,8 @@ target 'testeAPIs' do
 
   pod 'react-native-geolocation-service', :path => '../node_modules/react-native-geolocation-service'
 
+  pod 'RNSensors', :path => '../node_modules/react-native-sensors'
+
   target 'testeAPIsTests' do
     inherit! :complete
     # Pods for testing
